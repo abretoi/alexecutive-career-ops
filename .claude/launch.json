@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Alexecutive Career Ops",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "4200", "/Users/abretoi/Desktop/Alexecutive Career Ops/public"],
+      "port": 4200
+    }
+  ]
+}

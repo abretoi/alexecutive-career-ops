@@ -1,0 +1,55 @@
+# Canonical Application States
+# Source of truth for the Status field in data/applications.md
+
+states:
+  Evaluated:
+    description: "Job scored, no action taken yet"
+    terminal: false
+    can_transition_to: [Resume Ready, Applied, Skipped]
+
+  Resume Ready:
+    description: "Resume tailored for this role, not yet submitted"
+    terminal: false
+    can_transition_to: [Applied, Skipped]
+
+  Applied:
+    description: "Application submitted"
+    terminal: false
+    can_transition_to: [Responded, Interview, Rejected, Withdrawn]
+
+  Responded:
+    description: "Company sent a response (non-interview)"
+    terminal: false
+    can_transition_to: [Interview, Rejected]
+
+  Interview:
+    description: "Interview scheduled or actively in progress"
+    terminal: false
+    can_transition_to: [Offer, Rejected, Withdrawn]
+
+  Offer:
+    description: "Received a formal offer"
+    terminal: false
+    can_transition_to: [Accepted, Withdrawn]
+
+  Accepted:
+    description: "Offer accepted"
+    terminal: true
+
+  Rejected:
+    description: "Application rejected at any stage"
+    terminal: true
+
+  Withdrawn:
+    description: "Candidate withdrew from consideration"
+    terminal: true
+
+  Skipped:
+    description: "Decided not to apply after evaluation"
+    terminal: true
+
+rules:
+  - Status values are Title Case
+  - No markdown bold or extra text in the Status field
+  - No dates in the Status field (use the Date column)
+  - Only update with user confirmation when changing from a non-terminal state

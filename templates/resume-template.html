@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{FULL_NAME}} — Resume</title>
+<style>
+  /* ATS-compliant resume template — single column, print-ready */
+  @page { size: Letter; margin: 0.65in 0.7in; }
+  @media print {
+    body { font-size: 10.5pt; }
+    .no-print { display: none; }
+    a { color: inherit; text-decoration: none; }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: "Calibri", "Arial", sans-serif;
+    font-size: 10.5pt;
+    color: #1a1a1a;
+    line-height: 1.45;
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.65in 0.7in;
+    background: #fff;
+  }
+
+  /* ── Header ─────────────────────────────────────────────── */
+  .header { text-align: center; margin-bottom: 14pt; }
+
+  .name {
+    font-size: 20pt;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: -0.3pt;
+  }
+
+  .contact {
+    font-size: 9.5pt;
+    color: #444;
+    margin-top: 4pt;
+  }
+
+  .contact span { margin: 0 6pt; }
+  .contact span:first-child { margin-left: 0; }
+
+  /* ── Section ─────────────────────────────────────────────── */
+  .section { margin-bottom: 12pt; }
+
+  .section-title {
+    font-size: 11pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    color: #111;
+    border-bottom: 1.5pt solid #111;
+    padding-bottom: 2pt;
+    margin-bottom: 7pt;
+  }
+
+  /* ── Summary ─────────────────────────────────────────────── */
+  .summary { font-size: 10pt; color: #333; line-height: 1.5; }
+
+  /* ── Experience ──────────────────────────────────────────── */
+  .job { margin-bottom: 9pt; }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4pt;
+  }
+
+  .job-title {
+    font-weight: 700;
+    font-size: 10.5pt;
+    color: #111;
+  }
+
+  .job-company { font-weight: 400; }
+
+  .job-dates {
+    font-size: 9.5pt;
+    color: #555;
+    white-space: nowrap;
+  }
+
+  .job-location {
+    font-size: 9.5pt;
+    color: #555;
+    width: 100%;
+  }
+
+  ul {
+    margin-top: 4pt;
+    padding-left: 16pt;
+  }
+
+  li {
+    font-size: 10pt;
+    color: #222;
+    margin-bottom: 2.5pt;
+    line-height: 1.4;
+  }
+
+  /* ── Education ───────────────────────────────────────────── */
+  .edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .edu-degree { font-weight: 700; font-size: 10.5pt; }
+  .edu-school { font-weight: 400; }
+  .edu-year   { font-size: 9.5pt; color: #555; }
+  .edu-detail { font-size: 9.5pt; color: #444; margin-top: 2pt; }
+
+  /* ── Skills ──────────────────────────────────────────────── */
+  .skills-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 3pt;
+    font-size: 10pt;
+  }
+
+  .skills-label {
+    font-weight: 700;
+    min-width: 130pt;
+    color: #111;
+    flex-shrink: 0;
+  }
+
+  .skills-list { color: #333; }
+
+  /* ── Certifications ──────────────────────────────────────── */
+  .cert-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10pt;
+    margin-bottom: 3pt;
+  }
+
+  .cert-name { font-weight: 600; }
+  .cert-year { color: #555; }
+
+  /* ── Print button (not printed) ──────────────────────────── */
+  .no-print {
+    position: fixed;
+    top: 16px; right: 16px;
+    background: #111;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .no-print:hover { background: #333; }
+</style>
+</head>
+<body>
+
+<button class="no-print" onclick="window.print()">Save as PDF (Cmd+P)</button>
+
+<!-- ── HEADER ── -->
+<div class="header">
+  <div class="name">{{FULL_NAME}}</div>
+  <div class="contact">
+    <span>{{EMAIL}}</span>·
+    <span>{{PHONE}}</span>·
+    <span>{{LOCATION}}</span>·
+    <span>{{LINKEDIN}}</span>
+    {{#PORTFOLIO}}<span>·</span><span>{{PORTFOLIO}}</span>{{/PORTFOLIO}}
+  </div>
+</div>
+
+<!-- ── SUMMARY ── -->
+<div class="section">
+  <div class="section-title">Summary</div>
+  <div class="summary">{{SUMMARY}}</div>
+</div>
+
+<!-- ── EXPERIENCE ── -->
+<div class="section">
+  <div class="section-title">Experience</div>
+
+  <!-- REPEAT FOR EACH ROLE -->
+  <div class="job">
+    <div class="job-header">
+      <div>
+        <span class="job-title">{{JOB_TITLE}}</span>
+        <span class="job-company"> — {{COMPANY}}</span>
+      </div>
+      <div class="job-dates">{{START_DATE}} – {{END_DATE}}</div>
+    </div>
+    <div class="job-location">{{CITY}}, {{STATE}} {{WORK_ARRANGEMENT}}</div>
+    <ul>
+      <li>{{BULLET_1}}</li>
+      <li>{{BULLET_2}}</li>
+      <li>{{BULLET_3}}</li>
+    </ul>
+  </div>
+  <!-- END REPEAT -->
+
+</div>
+
+<!-- ── EDUCATION ── -->
+<div class="section">
+  <div class="section-title">Education</div>
+  <div class="edu-header">
+    <div>
+      <span class="edu-degree">{{DEGREE}}</span>
+      <span class="edu-school"> — {{UNIVERSITY}}</span>
+    </div>
+    <div class="edu-year">{{GRAD_YEAR}}</div>
+  </div>
+  <div class="edu-detail">{{CITY}}, {{STATE}} · {{HONORS}}</div>
+</div>
+
+<!-- ── SKILLS ── -->
+<div class="section">
+  <div class="section-title">Skills</div>
+  <div class="skills-row">
+    <span class="skills-label">{{SKILL_CATEGORY_1}}:</span>
+    <span class="skills-list">{{SKILLS_1}}</span>
+  </div>
+  <div class="skills-row">
+    <span class="skills-label">{{SKILL_CATEGORY_2}}:</span>
+    <span class="skills-list">{{SKILLS_2}}</span>
+  </div>
+</div>
+
+<!-- ── CERTIFICATIONS (optional) ── -->
+<div class="section">
+  <div class="section-title">Certifications</div>
+  <div class="cert-row">
+    <span class="cert-name">{{CERT_NAME}}</span>
+    <span class="cert-year">{{CERT_ISSUER}} · {{CERT_YEAR}}</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+# Alexecutive Career Ops User Profile
+# Copy this to profile.yml and fill in your details.
+# Claude will help you fill this during onboarding.
+
+personal:
+  name: "Your Full Name"
+  email: "you@example.com"
+  phone: "+1 (555) 555-5555"
+  location: "City, State, Country"
+  timezone: "America/New_York"
+  linkedin: "linkedin.com/in/yourprofile"
+  portfolio: ""                          # optional
+
+targeting:
+  # Primary roles you're applying for
+  target_roles:
+    - "Operations Manager"
+    - "Senior Analyst"
+    # Add more as needed
+
+  # Industry focus (see docs/ARCHETYPES.md for full list)
+  primary_industry: "Operations/Supply Chain"
+  secondary_industries:
+    - "Finance/Accounting"
+
+  # Seniority level: Entry | Mid | Senior | Manager | Director | VP | C-Suite
+  seniority_level: "Senior"
+
+  # Career intent: grow | pivot | step_up | lateral
+  career_intent: "step_up"
+
+compensation:
+  target_min: 100000              # USD annual
+  target_max: 140000
+  currency: "USD"
+  negotiable: true
+  include_equity: true
+  include_bonus: true
+
+location_preferences:
+  open_to_remote: true
+  remote_preference: "hybrid"     # remote | hybrid | onsite | any
+  preferred_locations:
+    - "New York, NY"
+    - "Remote"
+  willing_to_relocate: false
+  visa_sponsorship_needed: false
+
+work_preferences:
+  employment_types:               # full_time | part_time | contract | temp
+    - "full_time"
+  company_size:                   # startup | small | mid | large | enterprise | any
+    - "mid"
+    - "large"
+    - "enterprise"
+  industries_to_avoid: []
+  companies_to_avoid: []
+  no_travel: false
+  max_travel_pct: 25
+
+deal_breakers:
+  - ""                            # e.g., "requires on-site 5 days/week"
+
+narrative:
+  # Your career elevator pitch — used to personalize evaluations
+  summary: ""
+  superpower: ""                  # What you do better than most
+  top_achievement: ""             # Your proudest professional result
+  energized_by: ""
+  drained_by: ""
+  interview_notes: ""             # Anything else Claude should know
+
+ats_keywords:
+  # High-priority keywords for your target roles (from JDs you've seen)
+  primary: []
+  secondary: []

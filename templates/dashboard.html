@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alexecutive Career Ops</title>
+<style>
+  /* ============================================================
+     DESIGN SYSTEM — Apple-inspired dark theme
+     Black backgrounds, gradient text, SF Pro-style typography
+  ============================================================ */
+  :root {
+    --bg:        #000000;
+    --bg-card:   #0a0a0a;
+    --bg-card2:  #111111;
+    --bg-hover:  #1a1a1a;
+    --border:    rgba(255,255,255,0.08);
+    --border-hi: rgba(255,255,255,0.15);
+
+    /* Gradient palette */
+    --grad-blue:   linear-gradient(135deg, #0ea5e9, #6366f1);
+    --grad-purple: linear-gradient(135deg, #8b5cf6, #ec4899);
+    --grad-green:  linear-gradient(135deg, #10b981, #06b6d4);
+    --grad-amber:  linear-gradient(135deg, #f59e0b, #ef4444);
+    --grad-hero:   linear-gradient(135deg, #ffffff 0%, #8b5cf6 50%, #ec4899 100%);
+
+    /* Status colors */
+    --status-eval:       #6366f1;
+    --status-ready:      #8b5cf6;
+    --status-applied:    #0ea5e9;
+    --status-responded:  #06b6d4;
+    --status-interview:  #f59e0b;
+    --status-offer:      #10b981;
+    --status-accepted:   #22c55e;
+    --status-rejected:   #ef4444;
+    --status-withdrawn:  #6b7280;
+    --status-skipped:    #374151;
+
+    --text-primary:   #ffffff;
+    --text-secondary: rgba(255,255,255,0.6);
+    --text-tertiary:  rgba(255,255,255,0.35);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --radius-xl: 24px;
+
+    --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+    --font-mono: "SF Mono", "Fira Code", monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ── Scrollbar ─────────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+  /* ── Layout ────────────────────────────────────────────── */
+  .shell {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: 56px 1fr;
+    grid-template-areas: "sidebar topbar" "sidebar main";
+    min-height: 100vh;
+  }
+
+  /* ── Topbar ────────────────────────────────────────────── */
+  .topbar {
+    grid-area: topbar;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .topbar-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .topbar-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  /* ── Sidebar ────────────────────────────────────────────── */
+  .sidebar {
+    grid-area: sidebar;
+    border-right: 1px solid var(--border);
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .sidebar-logo {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 12px;
+  }
+
+  .logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    background: var(--grad-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+  }
+
+  .logo-sub {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .nav-section {
+    padding: 8px 12px 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 16px;
+    margin: 1px 8px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+  }
+
+  .nav-item:hover { background: var(--bg-hover); color: var(--text-primary); }
+  .nav-item.active {
+    background: rgba(139,92,246,0.15);
+    color: #a78bfa;
+  }
+
+  .nav-icon { width: 16px; text-align: center; font-size: 15px; }
+
+  .nav-badge {
+    margin-left: auto;
+    background: rgba(139,92,246,0.25);
+    color: #a78bfa;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 20px;
+  }
+
+  /* ── Main ────────────────────────────────────────────────── */
+  main {
+    grid-area: main;
+    padding: 28px;
+    overflow-y: auto;
+  }
+
+  /* ── Page header ─────────────────────────────────────────── */
+  .page-header {
+    margin-bottom: 24px;
+  }
+
+  .page-title {
+    font-size: 28px;
+    font-weight: 700;
+    background: var(--grad-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.8px;
+    line-height: 1.2;
+  }
+
+  .page-subtitle {
+    color: var(--text-secondary);
+    margin-top: 4px;
+    font-size: 14px;
+  }
+
+  /* ── Stat cards ──────────────────────────────────────────── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .stat-card:hover { border-color: var(--border-hi); }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .stat-card.blue::before  { background: var(--grad-blue); }
+  .stat-card.purple::before { background: var(--grad-purple); }
+  .stat-card.green::before  { background: var(--grad-green); }
+  .stat-card.amber::before  { background: var(--grad-amber); }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  .stat-value.blue   { background: var(--grad-blue);   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-value.purple { background: var(--grad-purple);  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-value.green  { background: var(--grad-green);   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-value.amber  { background: var(--grad-amber);   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .stat-delta {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 6px;
+  }
+
+  /* ── Section ─────────────────────────────────────────────── */
+  .section {
+    margin-bottom: 28px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* ── Table ───────────────────────────────────────────────── */
+  .table-wrap {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-tertiary);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-card2);
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.12s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--bg-hover); }
+
+  td {
+    padding: 13px 16px;
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    vertical-align: middle;
+  }
+
+  td.primary { color: var(--text-primary); font-weight: 500; }
+
+  /* ── Score badge ─────────────────────────────────────────── */
+  .score {
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+
+  .score.excellent { background: rgba(16,185,129,0.15); color: #10b981; }
+  .score.good      { background: rgba(14,165,233,0.15); color: #0ea5e9; }
+  .score.consider  { background: rgba(245,158,11,0.15); color: #f59e0b; }
+  .score.weak      { background: rgba(239,68,68,0.12);  color: #ef4444; }
+
+  /* ── Status badge ────────────────────────────────────────── */
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+  }
+
+  .status::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .status.evaluated   { background: rgba(99,102,241,0.12);  color: var(--status-eval); }
+  .status.ready       { background: rgba(139,92,246,0.12);  color: var(--status-ready); }
+  .status.applied     { background: rgba(14,165,233,0.12);  color: var(--status-applied); }
+  .status.responded   { background: rgba(6,182,212,0.12);   color: var(--status-responded); }
+  .status.interview   { background: rgba(245,158,11,0.12);  color: var(--status-interview); }
+  .status.offer       { background: rgba(16,185,129,0.12);  color: var(--status-offer); }
+  .status.accepted    { background: rgba(34,197,94,0.12);   color: var(--status-accepted); }
+  .status.rejected    { background: rgba(239,68,68,0.10);   color: var(--status-rejected); }
+  .status.withdrawn   { background: rgba(107,114,128,0.12); color: var(--status-withdrawn); }
+  .status.skipped     { background: rgba(55,65,81,0.25);    color: var(--status-skipped); }
+
+  /* ── Buttons ─────────────────────────────────────────────── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s ease;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    color: white;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: var(--bg-card2);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--border-hi); color: var(--text-primary); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .btn-ghost:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+  /* ── Pipeline chart ──────────────────────────────────────── */
+  .funnel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 8px;
+  }
+
+  .funnel-stage {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px 12px;
+    text-align: center;
+  }
+
+  .funnel-count {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .funnel-label {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+  }
+
+  /* ── Search bar ──────────────────────────────────────────── */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 8px 14px;
+    flex: 1;
+    max-width: 360px;
+  }
+
+  .search-bar input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 13.5px;
+    width: 100%;
+    font-family: var(--font);
+  }
+
+  .search-bar input::placeholder { color: var(--text-tertiary); }
+
+  /* ── Quick actions ───────────────────────────────────────── */
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .quick-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .quick-card:hover {
+    border-color: var(--border-hi);
+    background: var(--bg-hover);
+    transform: translateY(-2px);
+  }
+
+  .quick-icon {
+    font-size: 22px;
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px;
+  }
+
+  .quick-icon.blue   { background: rgba(14,165,233,0.12); }
+  .quick-icon.purple { background: rgba(139,92,246,0.12); }
+  .quick-icon.green  { background: rgba(16,185,129,0.12); }
+  .quick-icon.amber  { background: rgba(245,158,11,0.12); }
+  .quick-icon.pink   { background: rgba(236,72,153,0.12); }
+  .quick-icon.cyan   { background: rgba(6,182,212,0.12);  }
+
+  .quick-title {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .quick-desc {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    line-height: 1.4;
+  }
+
+  /* ── Misc ────────────────────────────────────────────────── */
+  .text-gradient {
+    background: var(--grad-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 24px 0;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--text-tertiary);
+  }
+
+  .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
+  .empty-state p { font-size: 14px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text">Alexecutive Career Ops</div>
+      <div class="logo-sub">Career Command Center</div>
+    </div>
+
+    <div class="nav-section">Overview</div>
+    <div class="nav-item active"><span class="nav-icon">⚡</span> Dashboard</div>
+    <div class="nav-item"><span class="nav-icon">🔍</span> Job Search</div>
+    <div class="nav-item"><span class="nav-icon">📋</span> Applications <span class="nav-badge">12</span></div>
+
+    <div class="nav-section">Resume</div>
+    <div class="nav-item"><span class="nav-icon">📄</span> My Resume</div>
+    <div class="nav-item"><span class="nav-icon">✨</span> ATS Optimizer</div>
+    <div class="nav-item"><span class="nav-icon">🎯</span> Tailored Versions</div>
+
+    <div class="nav-section">Profile</div>
+    <div class="nav-item"><span class="nav-icon">💼</span> LinkedIn Optimizer</div>
+    <div class="nav-item"><span class="nav-icon">🧠</span> Interview Prep</div>
+    <div class="nav-item"><span class="nav-icon">✉️</span> Outreach</div>
+
+    <div class="nav-section">Data</div>
+    <div class="nav-item"><span class="nav-icon">📊</span> Analytics</div>
+    <div class="nav-item"><span class="nav-icon">⬆️</span> Export</div>
+    <div class="nav-item"><span class="nav-icon">⚙️</span> Settings</div>
+  </aside>
+
+  <!-- ── Topbar ── -->
+  <header class="topbar">
+    <span class="topbar-title">Dashboard</span>
+    <div class="topbar-actions">
+      <div class="search-bar">
+        <span>🔍</span>
+        <input type="text" placeholder="Search applications, companies, roles…">
+      </div>
+      <button class="btn btn-primary">+ Evaluate Job</button>
+    </div>
+  </header>
+
+  <!-- ── Main ── -->
+  <main>
+
+    <!-- Page header -->
+    <div class="page-header">
+      <h1 class="page-title">Your Job Search, Optimized</h1>
+      <p class="page-subtitle">Open Claude Code and type <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px;font-family:var(--font-mono)">/opus help</code> to get started, or paste a job URL directly.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card blue">
+        <div class="stat-label">Total Applied</div>
+        <div class="stat-value blue">0</div>
+        <div class="stat-delta">Applications tracked</div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-label">Interviews</div>
+        <div class="stat-value purple">0</div>
+        <div class="stat-delta">Active conversations</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Offers</div>
+        <div class="stat-value green">0</div>
+        <div class="stat-delta">Received to date</div>
+      </div>
+      <div class="stat-card amber">
+        <div class="stat-label">Avg Score</div>
+        <div class="stat-value amber">—</div>
+        <div class="stat-delta">Of evaluated roles</div>
+      </div>
+    </div>
+
+    <!-- Quick actions -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">Quick Actions</span>
+      </div>
+      <div class="quick-actions">
+        <div class="quick-card">
+          <div class="quick-icon blue">🔍</div>
+          <div class="quick-title">Search Jobs</div>
+          <div class="quick-desc">LinkedIn, Indeed, Glassdoor + 10 more boards</div>
+        </div>
+        <div class="quick-card">
+          <div class="quick-icon purple">⚡</div>
+          <div class="quick-title">Evaluate a Role</div>
+          <div class="quick-desc">Paste a URL or job description for an A–F score</div>
+        </div>
+        <div class="quick-card">
+          <div class="quick-icon green">📄</div>
+          <div class="quick-title">Tailor Resume</div>
+          <div class="quick-desc">Generate an ATS-optimized version for any role</div>
+        </div>
+        <div class="quick-card">
+          <div class="quick-icon amber">🤖</div>
+          <div class="quick-title">Auto-Apply</div>
+          <div class="quick-desc">AI fills Workday, LinkedIn Easy Apply, Greenhouse</div>
+        </div>
+        <div class="quick-card">
+          <div class="quick-icon pink">💼</div>
+          <div class="quick-title">LinkedIn Optimizer</div>
+          <div class="quick-desc">Headline, About, bullets, and skills rewrite</div>
+        </div>
+        <div class="quick-card">
+          <div class="quick-icon cyan">⬆️</div>
+          <div class="quick-title">Export Tracker</div>
+          <div class="quick-desc">CSV for Google Sheets, Excel, or sharing</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline funnel -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">Pipeline Overview</span>
+        <button class="btn btn-ghost">View All</button>
+      </div>
+      <div class="funnel">
+        <div class="funnel-stage">
+          <div class="funnel-count" style="color:var(--status-eval)">0</div>
+          <div class="funnel-label">Evaluated</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-count" style="color:var(--status-ready)">0</div>
+          <div class="funnel-label">Resume Ready</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-count" style="color:var(--status-applied)">0</div>
+          <div class="funnel-label">Applied</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-count" style="color:var(--status-responded)">0</div>
+          <div class="funnel-label">Responded</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-count" style="color:var(--status-interview)">0</div>
+          <div class="funnel-label">Interview</div>
+        </div>
+        <div class="funnel-stage">
+          <div class="funnel-count" style="color:var(--status-offer)">0</div>
+          <div class="funnel-label">Offer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Applications table -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">Recent Applications</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-ghost">Filter</button>
+          <button class="btn btn-ghost">Sort</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Industry</th>
+              <th>Score</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="8">
+                <div class="empty-state">
+                  <div class="icon">📭</div>
+                  <p>No applications yet.<br>Open Claude Code and paste a job URL to get started.</p>
+                </div>
+              </td>
+            </tr>
+            <!-- Example row (hidden until populated by Claude):
+            <tr>
+              <td>001</td>
+              <td class="primary">Acme Corp</td>
+              <td class="primary">Senior Operations Manager</td>
+              <td>Operations</td>
+              <td><span class="score excellent">4.6/5</span></td>
+              <td><span class="status applied">Applied</span></td>
+              <td>2026-06-23</td>
+              <td>
+                <button class="btn btn-ghost">View</button>
+              </td>
+            </tr>
+            -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Resume ATS score -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">Resume Health</span>
+        <button class="btn btn-ghost">Run ATS Check</button>
+      </div>
+      <div class="table-wrap" style="padding:28px;text-align:center;">
+        <div class="empty-state">
+          <div class="icon">📄</div>
+          <p>No resume uploaded yet.<br>Open Claude Code and say "help me with my resume" to get started.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+# Alexecutive Career Ops Job Search Parameters
+# Copy to search-params.yml and customize.
+# These mirror LinkedIn's search filters.
+
+search:
+  # Keywords / job titles
+  keywords:
+    - "Operations Manager"
+    - "Senior Operations Analyst"
+    - "Program Manager"
+    # Add more
+
+  # Locations — use city names, state abbreviations, or "Remote"
+  locations:
+    - "New York, NY"
+    - "Remote"
+
+  # Date posted: past_24h | past_week | past_month | any_time
+  date_posted: "past_week"
+
+  # Experience level (LinkedIn filter equivalents)
+  experience_levels:
+    - "mid_senior"              # Entry | Associate | Mid-Senior | Director | Executive
+    - "director"
+
+  # Employment type
+  employment_types:
+    - "full_time"               # full_time | part_time | contract | temporary | internship
+
+  # On-site / Remote filter
+  work_arrangement:
+    - "remote"                  # on_site | remote | hybrid
+    - "hybrid"
+
+  # Industries to search within (LinkedIn industry codes or plain names)
+  industries: []
+
+  # Companies to always include (even if they don't surface in search)
+  target_companies: []
+
+  # Easy Apply only (LinkedIn)
+  easy_apply_only: false
+
+  # Visa sponsorship available
+  sponsorship_filter: false
+
+# Job boards to search
+boards:
+  linkedin: true
+  indeed: true
+  glassdoor: true
+  builtin: true
+  greenhouse: true              # via API
+  lever: true                   # via API
+  ashby: true                   # via API
+  wellfound: false              # Startup-focused
+  dice: false                   # Tech-focused
+  monster: false
+
+# Auto-scan schedule (optional)
+# Set to run periodic searches
+auto_scan:
+  enabled: false
+  frequency: "weekly"           # daily | weekly | manual
+  notify_threshold: 3.5         # Only surface roles scoring >= this
+
+# Deduplication
+dedup:
+  by_company_role: true         # Skip if same company+role already in tracker
+  by_url: true                  # Skip if URL already processed

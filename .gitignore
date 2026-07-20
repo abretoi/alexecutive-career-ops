@@ -1,0 +1,20 @@
+node_modules/
+output/
+reports/
+data/
+config/profile.yml
+config/search-params.yml
+modes/_profile.md
+resume.md
+article-digest.md
+interview-prep/*.md
+!interview-prep/story-bank.md
+.env
+*.pdf
+.DS_Store
+graphify-out/
+Career Job Ops/*.zip
+__pycache__/
+*.pyc
+*.bak
+test-results/
